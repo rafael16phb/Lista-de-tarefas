@@ -1,23 +1,35 @@
-const input = document.querySelector("input");
-const addButton = document.querySelector(".adicionar");
-const tarefasContainer = document.querySelector("#tarefas");
-let tarefas = [];
+const input = document.querySelector("input")
+const addButton = document.querySelector(".adicionar")
+const tarefasContainer = document.querySelector("#tarefas")
+const ButtonEx = document.querySelector("#button-ex")
+let tarefas = []
 
-addButton.addEventListener("click", addTarefa);
+addButton.addEventListener("click", addTarefa)
 
 function addTarefa() {
-  tarefas.push(input.value);
-  input.value = "";
-  imprimirTarefa();
+  tarefas.push(input.value)
+  input.value = ""
+  imprimirTarefa()
+}
+function removerDiv(event) {
+  const textoSelecionado = event.target.parentElement.firstChild.innerText
+  tarefas = tarefas.filter((tarefa) => tarefa !== textoSelecionado)
+  imprimirTarefa()
 }
 
 function imprimirTarefa() {
-  tarefasContainer.innerHTML = "";
+  tarefasContainer.innerHTML = ""
   for (let index = 0; index < tarefas.length; index++) {
-    const tarefa = tarefas[index];
-
-    const textoTarefa = document.createElement("p");
-    textoTarefa.innerText = tarefa;
-    tarefasContainer.appendChild(textoTarefa);
+    const tarefa = tarefas[index]
+    const divTarefa = document.createElement("div")
+    const textoTarefa = document.createElement("p")
+    const buttonRemover = document.createElement("button")
+    buttonRemover.addEventListener("click", removerDiv)
+    buttonRemover.innerText = "🗑️"
+    divTarefa.className = "lista"
+    textoTarefa.innerText = tarefa
+    divTarefa.appendChild(textoTarefa)
+    divTarefa.appendChild(buttonRemover)
+    tarefasContainer.appendChild(divTarefa)
   }
 }

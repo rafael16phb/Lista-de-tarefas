@@ -38,6 +38,9 @@ input {
 .limpar {
   background-color: #01699d;
 }
+.Lista {
+  border: 1rem solid red;
+}
 
 h1 {
   color: #fefefe;
