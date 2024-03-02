@@ -1,7 +1,6 @@
 const input = document.querySelector("input")
 const addButton = document.querySelector(".adicionar")
 const tarefasContainer = document.querySelector("#tarefas")
-const ButtonEx = document.querySelector("#button-ex")
 let tarefas = []
 
 addButton.addEventListener("click", addTarefa)
@@ -33,8 +32,8 @@ function imprimirTarefa() {
     tarefasContainer.appendChild(divTarefa)
   }
 }
-const buttonLs = document.querySelector(".limpar")
-buttonLs.addEventListener("click", limpar)
+const buttonLimpar = document.querySelector(".limpar")
+buttonLimpar.addEventListener("click", limpar)
 function limpar() {
   tarefasContainer.innerHTML = ""
   tarefas = []
