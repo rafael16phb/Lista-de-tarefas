@@ -3,34 +3,35 @@ const addButton = document.querySelector(".adicionar")
 const tarefasContainer = document.querySelector("#tarefas")
 let tarefas = []
 
+let id = 0
 addButton.addEventListener("click", addTarefa)
 
 function addTarefa() {
-  tarefas.push(input.value)
+  tarefas.push({ id, texto: input.value })
+  id++
   input.value = ""
   imprimirTarefa()
 }
-function removerDiv(event) {
-  const textoSelecionado = event.target.parentElement.firstChild.innerText
-  tarefas = tarefas.filter((tarefa) => tarefa !== textoSelecionado)
+
+function removerDiv(id) {
+  tarefas = tarefas.filter((tarefa) => tarefa.id !== id)
   imprimirTarefa()
 }
 
 function imprimirTarefa() {
   tarefasContainer.innerHTML = ""
-  for (let index = 0; index < tarefas.length; index++) {
-    const tarefa = tarefas[index]
+  tarefas.forEach((tarefa, index) => {
     const divTarefa = document.createElement("div")
     const textoTarefa = document.createElement("p")
     const buttonRemover = document.createElement("button")
-    buttonRemover.addEventListener("click", removerDiv)
     buttonRemover.innerText = "🗑️"
+    buttonRemover.addEventListener("click", () => removerDiv(tarefa.id))
     divTarefa.className = "lista"
-    textoTarefa.innerText = tarefa
+    textoTarefa.innerText = tarefa.texto
     divTarefa.appendChild(textoTarefa)
     divTarefa.appendChild(buttonRemover)
     tarefasContainer.appendChild(divTarefa)
-  }
+  })
 }
 const buttonLimpar = document.querySelector(".limpar")
 buttonLimpar.addEventListener("click", limpar)
